@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ 
+  <html>
+    <h2>Sign up</h2>
+      <head>
+            <style>
+                table {
+                  font-family: arial, sans-serif;
+                  border-collapse: collapse;
+                  width: 100%;
+                }
+                body  {
+                    background-color: #bedcfa;
+                    }
+                
+                td, th {
+                  border: 1px solid #dddddd;
+                  text-align: left;
+                  padding: 8px;
+                }
+                button {
+                    background-color: white;
+                    color: black;
+                    border: 2px solid #af7c4c; /* Green */
+                }
+                tr:nth-child(even) {
+                  background-color: #dddddd;
+                }
+                </style>
+      </head>
+  </html>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}
